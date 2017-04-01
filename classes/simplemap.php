@@ -87,6 +87,11 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 
 			$to_display .= '<div id="simplemap" style="' . $hidemap . 'width: ' . $map_width . '; height: ' . $map_height . ';"></div>';
 			$to_display .= '<div id="results" style="' . $hidelist . 'width: ' . $map_width . ';"></div>';
+            $to_display .= '<div id="sm_page_num" style="' . $hidelist . 'width: ' . $map_width . '; text-align: center;">';
+            $to_display .= '<a href="javascript:prevPage()" id="btn_prev" style="float: left;">Prev</a>';
+            $to_display .= 'Page 1';
+            $to_display .= '<a href="javascript:nextPage()" id="btn_next" style="float: right;">Next</a>';
+            $to_display .= '</div>';
 			$to_display .= '<script type="text/javascript">';
 			$to_display .= '(function($) { ';
 
@@ -427,6 +432,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 
 			// Hidden value for limit.
 			$location_search .= "<input type='hidden' id='location_search_limit' value='" . $limit_value . "' />";
+            $location_search .= "<input type='hidden' id='location_page_num' value='1' />";
 
 			// Hidden value set to true if we got here via search.
 			$location_search .= "<input type='hidden' id='location_is_search_results' name='sm-location-search' value='" . $is_sm_search . "' />";
@@ -954,6 +960,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			searchData.lat            = document.getElementById('location_search_default_lat').value;
 			searchData.lng            = document.getElementById('location_search_default_lng').value;
 			searchData.limit        = document.getElementById('location_search_limit').value;
+            searchData.page_num     = document.getElementById('location_page_num').value;
 			searchData.searching    = document.getElementById('location_is_search_results').value;
 
 			// Do SimpleMap Taxonomies
@@ -1085,6 +1092,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			searchData.mapLock = 'unlock';
 			searchData.homeAddress = query;
 
+            //Search Query
 			searchLocationsNear(searchData);
 			}
 			}
@@ -1124,7 +1132,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			}
 			?>
 
-			var searchUrl = siteurl + '/?sm-xml-search=1&<?php echo $wpmlquery;  ?>lat=' + searchData.center.lat() + '&lng=' + searchData.center.lng() + '&radius=' + searchData.radius + '&namequery=' + searchData.homeAddress + '&query_type=' + searchData.query_type  + '&limit=' + searchData.limit + <?php echo $js_tax_string; ?>'&address=' + searchData.address + '&city=' + searchData.city + '&state=' + searchData.state + '&zip=' + searchData.zip + '&pid=<?php echo esc_js( absint( $_GET['smpid'] ) ); ?>';
+			var searchUrl = siteurl + '/?sm-xml-search=1&<?php echo $wpmlquery;  ?>lat=' + searchData.center.lat() + '&lng=' + searchData.center.lng() + '&radius=' + searchData.radius + '&namequery=' + searchData.homeAddress + '&query_type=' + searchData.query_type  + '&limit=' + searchData.limit + '&page_num=' + searchData.page_num + <?php echo $js_tax_string; ?>'&address=' + searchData.address + '&city=' + searchData.city + '&state=' + searchData.state + '&zip=' + searchData.zip + '&pid=<?php echo esc_js( absint( $_GET['smpid'] ) ); ?>';
 
 			<?php if ( apply_filters( 'sm-use-updating-image', true ) ) : ?>
 				// Display Updating Message and hide search results
@@ -1132,6 +1140,9 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 				jQuery( "#simplemap" ).hide();
 				jQuery( "#simplemap-updating" ).show();
 				}
+                var total_locations = data[1];
+                var data_tmp[] = data[0];
+                data = data_tmp;
 			<?php endif; ?>
 			jQuery( "#results" ).html( '' );
 

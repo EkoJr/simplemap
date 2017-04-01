@@ -25,6 +25,7 @@ if ( ! class_exists( 'SM_XML_Search' ) ) {
 					'onlyzip'    => false,
 					'country'    => false,
 					'limit'      => false,
+                    'page_num'   => 0,
 					'pid'        => 0,
 				);
 				$input    = array_filter( array_intersect_key( $_GET, $defaults ) ) + $defaults;
@@ -131,7 +132,17 @@ if ( ! class_exists( 'SM_XML_Search' ) ) {
 						posts.ID
 						$distance_having
 					ORDER BY " . apply_filters( 'sm-location-sort-order', $distance_order . ' posts.post_name ASC', $input ) . " " . $limit;
+                    //ORDER BY " . apply_filters( 'sm-location-sort-order', $distance_order . ' posts.post_name ASC', $input ) . " " . $limit . " OFFSET " . ($limit * $page_num);
 
+                $input['page_num'] = intval($input['page_num']);
+                $total_locations = 0;
+                if ( 1 === $input['page_num']) {
+                    $total_sql = '';
+                    $total_sql = substr($sql, 0, strrpos($sql, " LIMIT"));
+                    
+                    $total_locations = sizeof( $wpdb->get_results( $total_sql ) );
+                    
+                }
 				$sql = apply_filters( 'sm-xml-search-locations-sql', $sql );
 
 				// TODO: Consider using this to generate the marker node attributes in print_xml().
@@ -202,18 +213,19 @@ if ( ! class_exists( 'SM_XML_Search' ) ) {
 				}
 
 				$locations = apply_filters( 'sm-xml-search-locations', $locations );
-				$this->print_json( $locations, $smtaxes );
+				$this->print_json( $locations, $smtaxes, $total_locations );
 			}
 		}
 
 		// Prints the JSON output
-		function print_json( $dataset, $smtaxes ) {
+		function print_json( $locations, $smtaxes, $total_locations ) {
 			header( 'Status: 200 OK', false, 200 );
 			header( 'Content-type: application/json' );
 			do_action( 'sm-xml-search-headers' );
 
-			do_action( 'sm-print-json', $dataset, $smtaxes );
+			do_action( 'sm-print-json', $locations, $smtaxes );
 
+            $dataset = array( $locations, $total_locations );
 			echo json_encode( $dataset );
 			die();
 		}
