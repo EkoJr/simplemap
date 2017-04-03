@@ -961,7 +961,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			searchData.lat            = document.getElementById('location_search_default_lat').value;
 			searchData.lng            = document.getElementById('location_search_default_lng').value;
 			searchData.limit        = document.getElementById('location_search_limit').value;
-			searchData.page_num		= document.getElementById('location_search_page_num').value;
+			searchData.page_num     = document.getElementById('location_search_page_num').value;
 			searchData.num_of_pages = document.getElementById('location_search_num_of_pages').value;
 			searchData.searching    = document.getElementById('location_is_search_results').value;
 
@@ -1642,7 +1642,6 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 			function nextPage() {
 				var page_num = parseInt( document.getElementById('location_search_page_num').value );
 				var num_of_pages = parseInt( document.getElementById('location_search_num_of_pages').value );
-
 
 				if ( page_num < num_of_pages ) {
 					page_num++;

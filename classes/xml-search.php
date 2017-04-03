@@ -13,21 +13,21 @@ if ( ! class_exists( 'SM_XML_Search' ) ) {
 				remove_filter( 'the_title', 'at_title_check' );
 
 				$defaults = array(
-					'lat'			=> false,
-					'lng'			=> false,
-					'radius'		=> false,
-					'namequery'		=> false,
-					'query_type'	=> 'distance',
-					'address'		=> false,
-					'city'			=> false,
-					'state'			=> false,
-					'zip'			=> false,
-					'onlyzip'		=> false,
-					'country'		=> false,
-					'limit'			=> false,
-					'page_num'		=> 0,
-					'num_of_pages'	=> 0,
-					'pid'			=> 0,
+					'lat'           => false,
+					'lng'           => false,
+					'radius'        => false,
+					'namequery'     => false,
+					'query_type'    => 'distance',
+					'address'       => false,
+					'city'          => false,
+					'state'         => false,
+					'zip'           => false,
+					'onlyzip'       => false,
+					'country'       => false,
+					'limit'         => false,
+					'page_num'      => 0,
+					'num_of_pages'  => 0,
+					'pid'           => 0,
 				);
 				$input    = array_filter( array_intersect_key( $_GET, $defaults ) ) + $defaults;
 
@@ -151,17 +151,17 @@ if ( ! class_exists( 'SM_XML_Search' ) ) {
 
 				// TODO: Consider using this to generate the marker node attributes in print_xml().
 				$location_fields = array(
-					'location_address'	=> 'address',
-					'location_address2'	=> 'address2',
-					'location_city'		=> 'city',
-					'location_state'	=> 'state',
-					'location_zip'		=> 'zip',
-					'location_country'	=> 'country',
-					'location_phone'	=> 'phone',
-					'location_fax'		=> 'fax',
-					'location_email'	=> 'email',
-					'location_url'		=> 'url',
-					'location_special'	=> 'special',
+					'location_address'  => 'address',
+					'location_address2' => 'address2',
+					'location_city'     => 'city',
+					'location_state'    => 'state',
+					'location_zip'      => 'zip',
+					'location_country'  => 'country',
+					'location_phone'    => 'phone',
+					'location_fax'      => 'fax',
+					'location_email'    => 'email',
+					'location_url'      => 'url',
+					'location_special'  => 'special',
 				);
 
 				$location_field_map = apply_filters( 'sm_location_fields', $location_fields );
