@@ -687,11 +687,11 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 
 			do_action( 'sm-general-options-js' );
 			?>
-            function codeAddress() {
-                var gm_api_key = document.getElementById("api_key").value;
-                // if this is modified, modify mirror function in master-js php function
-                var d_address = document.getElementById("default_address").value;
-				
+			function codeAddress() {
+				var gm_api_key = document.getElementById("api_key").value;
+				// if this is modified, modify mirror function in master-js php function
+				var d_address = document.getElementById("default_address").value;
+
 				if ( gm_api_key ) {
 					geocoder = new google.maps.Geocoder();
 					var a = geocoder.geocode( { 'address': d_address }, function( results, status ) {
@@ -707,8 +707,8 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 					gm_authFailure();
 				}
 			}
-			function gm_authFailure() { 
-				alert("Google Maps API Key is Required within Map Configuration."); 
+			function gm_authFailure() {
+				alert("Google Maps API Key is Required within Map Configuration.");
 			};
 			<?php
 			die();
