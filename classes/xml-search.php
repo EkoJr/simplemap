@@ -229,7 +229,7 @@ if ( ! class_exists( 'SM_XML_Search' ) ) {
 
 			do_action( 'sm-print-json', $locations, $smtaxes );
 
-            $dataset = array( $num_of_pages, $locations );
+			$dataset = array( $num_of_pages, $locations );
 			echo json_encode( $dataset );
 			die();
 		}

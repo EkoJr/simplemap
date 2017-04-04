@@ -199,15 +199,15 @@ vertical-align:top;
 }
 
 .location-search-prev-page {
-    float: left;
+	float: left;
 }
 
 .location-search-next-page {
-    float: right;
+	float: right;
 }
 
 .location-search-page-num {
-    display: inline-block;
+	display: inline-block;
 }
 
 .no-linebreak {
