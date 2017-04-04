@@ -88,9 +88,9 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			$to_display .= '<div id="simplemap" style="' . $hidemap . 'width: ' . $map_width . '; height: ' . $map_height . ';"></div>';
 			$to_display .= '<div id="results" style="' . $hidelist . 'width: ' . $map_width . ';"></div>';
 			$to_display .= '<div style="' . $hidelist . 'width: ' . $map_width . '; text-align: center;">';
-			$to_display .= '<a href="javascript:prevPage()" id="btn_prev" class="location_search_prev_page" style="float: left;">Prev</a>';
-			$to_display .= '<div id="sm_page_num" class="location_search_page_num" style="display: inline-block;">Page 1</div>';
-			$to_display .= '<a href="javascript:nextPage()" id="btn_next" class="location_search_next_page" style="float: right;">Next</a>';
+			$to_display .= '<a href="javascript:prevPage()" id="btn_prev" class="location-search-prev-page">Prev</a>';
+			$to_display .= '<div id="sm_page_num" class="location-search-page-num">Page 1</div>';
+			$to_display .= '<a href="javascript:nextPage()" id="btn_next" class="location-search-next-page">Next</a>';
 			$to_display .= '</div>';
 			$to_display .= '<script type="text/javascript">';
 			$to_display .= '(function($) { ';
