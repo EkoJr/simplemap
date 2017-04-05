@@ -144,7 +144,9 @@ if ( ! class_exists( 'SM_XML_Search' ) ) {
 					$total_sql = substr( $sql, 0, strrpos( $sql, ' LIMIT' ) );
 
 					$total_locations = sizeof( $wpdb->get_results( $total_sql ) );
-
+					if ( 0 === $input['limit'] ) {
+						$input['limit'] = $total_locations;
+					}
 					$num_of_pages = (int) ceil( $total_locations / $input['limit'] );
 				}
 				$sql = apply_filters( 'sm-xml-search-locations-sql', $sql );

@@ -963,7 +963,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			searchData.limit        = document.getElementById('location_search_limit').value;
 			searchData.page_num     = document.getElementById('location_search_page_num').value;
 			searchData.num_of_pages = document.getElementById('location_search_num_of_pages').value;
-			searchData.searching    = document.getElementById('location_is_search_results').value;
+			searchData.searching    = is_search;
 
 			// Do SimpleMap Taxonomies
 			<?php
@@ -1084,7 +1084,6 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			if ( 'none' != autoload || is_search ) {
 			if ( 'all' == autoload && is_search != 1 ) {
 			searchData.radius = 0;
-			searchData.limit = 0;
 			}
 
 			if (! searchData.center) {
@@ -1108,7 +1107,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			if ( units == 'km' ) {
 			searchData.radius = parseInt( searchData.radius ) / 1.609344;
 			}
-			} else if ( autoload == 'all' ) {
+			} else if ( autoload == 'all' && searchData.searching != 1) {
 			searchData.radius = 0;
 			} else {
 			if ( units == 'mi' ) {
@@ -1635,7 +1634,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 					document.getElementById('location_search_page_num').value = page_num;
 					jQuery("#sm_page_num").html( "Page " + page_num );
 
-					searchLocations( 1 );
+					searchLocations( 0 );
 				}
 			}
 
@@ -1648,7 +1647,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 					document.getElementById('location_search_page_num').value = page_num;
 					jQuery("#sm_page_num").html( "Page " + page_num );
 
-					searchLocations( 1 );
+					searchLocations( 0 );
 				}
 			}
 			function searchOnSubmit() {
