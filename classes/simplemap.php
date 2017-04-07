@@ -582,7 +582,9 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			$tax_search = '';
 			$tax_label  = apply_filters( $php_taxonomy . '-text', __( $tax_object->labels->singular_name . ': ' ), 'simplemap' );
 
-			$taxes_array = apply_filters( 'sm-search-from-taxonomies', $taxes_array, $taxonomy );
+			if ( 'sm-day' !== $taxonomy ) {
+				$taxes_array = apply_filters( 'sm-search-from-taxonomies', $taxes_array, $taxonomy );
+			}
 
 			if ( 'checkboxes' == $taxonomy_field_type ) {
 				// Print checkbox for each available cat.
