@@ -87,7 +87,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 
 			$to_display .= '<div id="simplemap" style="' . $hidemap . 'width: ' . $map_width . '; height: ' . $map_height . ';"></div>';
 			$to_display .= '<div id="results" style="' . $hidelist . 'width: ' . $map_width . ';"></div>';
-			$to_display .= '<div style="' . $hidelist . 'width: ' . $map_width . '; text-align: center;">';
+			$to_display .= '<div id="sm_page_footer" style="' . $hidelist . 'width: ' . $map_width . '; text-align: center; display: none;">';
 			$to_display .= '<a href="javascript:prevPage()" id="btn_prev" class="location-search-prev-page nav-previous alignleft">Prev</a>';
 			$to_display .= '<div id="sm_page_num" class="location-search-page-num">Page 1</div>';
 			$to_display .= '<a href="javascript:nextPage()" id="btn_next" class="location-search-next-page nav-next alignright">Next</a>';
@@ -1146,8 +1146,17 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			jQuery.get( searchUrl, {}, function(data) {
 			<?php if ( apply_filters( 'sm-use-updating-image', true ) ) : ?>
 				number_of_pages = data.shift();
-				data = data.shift();
+				var page_num = parseInt( document.getElementById('location_search_page_num').value );
+				//var num_of_pages = parseInt( document.getElementById('location_search_num_of_pages').value );
+				jQuery("#sm_page_num").html( "Page " + page_num + " of " + number_of_pages );
+				
 				document.getElementById('location_search_num_of_pages').value = number_of_pages;
+				if ( 1 < number_of_pages ) {
+					document.getElementById('sm_page_footer').style.display = 'block';
+				} else {
+					document.getElementById('sm_page_footer').style.display = 'none';
+				}
+				data = data.shift();
 				// Hide Updating Message
 				if ( jQuery( "#simplemap-updating" ).is(":visible") ) {
 				jQuery( "#simplemap-updating" ).hide();
@@ -1632,7 +1641,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 				if (page_num > 1) {
 					page_num--;
 					document.getElementById('location_search_page_num').value = page_num;
-					jQuery("#sm_page_num").html( "Page " + page_num );
+					//jQuery("#sm_page_num").html( "Page " + page_num + " of " + num_of_pages );
 
 					searchLocations( 0 );
 				}
@@ -1641,11 +1650,12 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 			function nextPage() {
 				var page_num = parseInt( document.getElementById('location_search_page_num').value );
 				var num_of_pages = parseInt( document.getElementById('location_search_num_of_pages').value );
+				
 
 				if ( page_num < num_of_pages ) {
 					page_num++;
 					document.getElementById('location_search_page_num').value = page_num;
-					jQuery("#sm_page_num").html( "Page " + page_num );
+					//jQuery("#sm_page_num").html( "Page " + page_num + " of " + num_of_pages );
 
 					searchLocations( 0 );
 				}
@@ -1655,6 +1665,8 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 				document.getElementById('location_search_num_of_pages').value = 0;
 
 				searchLocations( 1 );
+				var num_of_pages = parseInt( document.getElementById('location_search_num_of_pages').value );
+				//jQuery("#sm_page_num").html( "Page 1 of " + num_of_pages );
 			}
 			<?php
 			die();
