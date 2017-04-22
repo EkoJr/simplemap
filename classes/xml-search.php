@@ -210,6 +210,7 @@ if ( ! class_exists( 'SM_XML_Search' ) ) {
 		function print_json( $dataset, $smtaxes ) {
 			header( 'Status: 200 OK', false, 200 );
 			header( 'Content-type: application/json' );
+			header( 'Access-Control-Allow-Origin: *' ); 
 			do_action( 'sm-xml-search-headers' );
 
 			do_action( 'sm-print-json', $dataset, $smtaxes );

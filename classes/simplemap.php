@@ -683,6 +683,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 
 			header( 'Status: 200 OK', false, 200 );
 			header( 'Content-type: application/x-javascript' );
+			//header( 'Access-Control-Allow-Origin: *' );
 			do_action( 'sm-master-js-headers' );
 
 			$options = $this->get_options();
@@ -716,6 +717,7 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 
 			header( 'HTTP/1.1 200 OK' );
 			header( 'Content-type: application/x-javascript' );
+			header( 'Access-Control-Allow-Origin: *' );
 			$options = $this->get_options();
 
 			if ( isset( $_GET['wpml'] ) ) {
