@@ -1643,7 +1643,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 					document.getElementById('location_search_page_num').value = page_num;
 					//jQuery("#sm_page_num").html( "Page " + page_num + " of " + num_of_pages );
 
-					searchLocations( 0 );
+					searchLocations( 1 );
 				}
 			}
 
@@ -1657,7 +1657,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 					document.getElementById('location_search_page_num').value = page_num;
 					//jQuery("#sm_page_num").html( "Page " + page_num + " of " + num_of_pages );
 
-					searchLocations( 0 );
+					searchLocations( 1 );
 				}
 			}
 			function searchOnSubmit() {

@@ -54,7 +54,7 @@ if ( ! class_exists( 'SM_XML_Search' ) ) {
 
 				// Locations within specific distance or just get them all?
 				$distance_select = $wpdb->prepare( "( 3959 * ACOS( COS( RADIANS(%s) ) * COS( RADIANS( lat_tbl.meta_value ) ) * COS( RADIANS( lng_tbl.meta_value ) - RADIANS(%s) ) + SIN( RADIANS(%s) ) * SIN( RADIANS( lat_tbl.meta_value ) ) ) ) AS distance", $input['lat'], $input['lng'], $input['lat'] ) . ', ';
-				$distance_order  = 'distance, ';
+				$distance_order  = 'distance ASC, ';
 
 				if ( $input['radius'] ) {
 					$input['radius'] = ( $input['radius'] < 1 ) ? 1 : $input['radius'];
