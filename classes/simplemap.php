@@ -270,7 +270,9 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 
 			// More Taxonomy Fields.
 			foreach ( $sm_tax_names as $tax_name ) {
-				$hidden_fields[] = '<input type="hidden" id="avail_' . str_replace( '-', '_', $tax_name ) . '" value="' . $atts[ str_replace( '-', '_', $tax_name ) ] . '" />';
+                if ( isset( $atts[ str_replace( '-', '_', $tax_name ) ] ) ) {
+                    $hidden_fields[] = '<input type="hidden" id="avail_' . str_replace( '-', '_', $tax_name ) . '" value="' . $atts[ str_replace( '-', '_', $tax_name ) ] . '" />';
+                }
 			}
 
 			// Hide search?.
@@ -560,6 +562,11 @@ if ( ! class_exists( 'Simple_Map' ) ) {
 			$taxes_array = array();
 
 			// Loop through all cats and create array of available cats.
+            $locale_lang = get_locale();
+            $arg_terms = array(
+                'taxonomy' => $taxonomy,
+                'lang'     => $locale_lang,
+            );
 			if ( $all_taxes = get_terms( $taxonomy ) ) {
 
 				foreach ( $all_taxes as $key => $value ) {
